@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import linalg as LA
+import matplotlib as plt
 N = 10
 b = np.ones(N - 1)
 e = np.full(N, 2.)
@@ -11,10 +12,32 @@ c = np.diagflat(-b, -1)
 d = np.diagflat(e)
 
 print(a + c + d)
-ħ = 1
-m = 1
-Δx = (a - 0)/(N - 1)
-λ =  ħ**2/(2*m*(Δx)**2)
+#ħ = 1
+#m = 1
+#Δx = (a - 0)/(N - 1)
+#print(Δx)
+#λ =  ħ**2/(2*m*(Δx)**2)
+#numerator = ħ**2
+#denom = 2*m*(Δx)**2
+#λ = np.divide(numerator, denom, out=np.zeros_like(numerator), where=denom!=0)
 
 
-print(λ*(a + c + d))
+#print(λ*(a + c + d))
+
+eigenvalue , eigenvector = LA.eig(a + c + d)
+#print(eigenvalue)
+
+print()
+
+first_three = eigenvalue[eigenvalue.argsort()[:3]]
+print(first_three)
+
+out = []
+
+for elm in first_three:
+    out += [0.0, elm, 1.0]
+
+out = np.array(out)
+
+plt.pyplot.plot(out)
+plt.pyplot.show()
