@@ -1,0 +1,33 @@
+import numpy as np
+from numpy import linalg as LA
+import matplotlib.pyplot as plt
+N = 100
+w = (2 + (500/10201)*(np.sin(np.pi*N/101)))
+ones_matrix = np.ones(N - 1)
+twos_matrix = np.full(N, w)
+
+#print(ones_matrix)
+
+upper_matrix = np.diagflat(-ones_matrix, -1)
+#print(upper_matrix)
+lower_matrix = np.diagflat(-ones_matrix, 1)
+#print(lower_matrix)
+middle_matrix = np.diagflat(twos_matrix)
+#print(middle_matrix)
+#print(upper_matrix + lower_matrix + middle_matrix)
+hbar = 1
+mass = 1
+deltax = (1 - 0)/(N - 1)
+#print(deltax)
+lamb =  hbar**2/(2*mass*(deltax)**2)
+#print(lamb)
+
+eigenvalue , eigenvector = LA.eig(lamb*(upper_matrix + lower_matrix + middle_matrix))
+#print(eigenvalue)
+first_three = eigenvalue[eigenvalue.argsort()[:3]]
+print(first_three)
+#energy_one = np.power(np.pi, 2)/2.0
+#print(energy_one)
+plt.plot(eigenvalue, eigenvector)
+#plt.plot(first_three)
+
